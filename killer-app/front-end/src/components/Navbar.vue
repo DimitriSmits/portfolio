@@ -1,8 +1,8 @@
 <template>
 <nav>
-    <v-toolbar 
+    <v-app-bar
       flat
-      app
+      
       dark
     >
         <v-btn to="/Home" icon>
@@ -10,28 +10,36 @@
       </v-btn>
      <v-spacer></v-spacer>
          <v-btn to="/Coaches">
-          <v-span>
+          <v-span name="test">
               Coaches
           </v-span>
       </v-btn>
       <v-btn to="/Statistics">
-          <v-span>
+          <v-span name="test">
               Statistics
           </v-span>
       </v-btn>
         <v-btn to="/Lessons">
-          <v-span>
+          <v-span name="test">
              Lessons
           </v-span>
       </v-btn>
         <v-btn to="/CoachSessions">
-          <v-span>
+          <v-span name="test">
              Coach sessions
           </v-span>
       </v-btn>
       
 
       <v-spacer></v-spacer>
+      <v-btn to="/LoginPage" icon>
+        <v-icon>account_circle
+        </v-icon>
+      </v-btn>
+      <v-btn to="/RegisterPage" icon>
+        <v-icon>account_circle
+        </v-icon>
+      </v-btn>
     
       <v-btn to="/Profile" icon>
         <v-icon>account_circle
@@ -42,7 +50,7 @@
       </v-btn>
       
 
-    </v-toolbar>
+    </v-app-bar>
   
   
 

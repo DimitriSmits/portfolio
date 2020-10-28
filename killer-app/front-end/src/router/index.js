@@ -7,6 +7,8 @@ import CoachSessions from '../views/CoachSessions.vue'
 import Statistics from '../views/Statistics.vue'
 import Profile from '../views/Profile.vue'
 import Lesson from '../views/Lesson.vue'
+import RegisterPage from '../views/RegisterPage'
+import LoginPage from '../views/LoginPage'
 
 
 
@@ -60,6 +62,16 @@ const routes = [
     path: '/lesson',
     name: 'Lesson',
     component: Lesson
+  },
+  {
+    path: '/RegisterPage',
+    name: 'RegisterPage',
+    component: RegisterPage
+  },
+  {
+    path: '/LoginPage',
+    name: 'LoginPage',
+    component: LoginPage
   }
 
   
