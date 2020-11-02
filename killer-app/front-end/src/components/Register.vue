@@ -45,6 +45,14 @@
                   </v-flex>
                 </v-layout>
               </form>
+              <v-alert
+      class="elevation-12 mx-auto"
+      outlined
+      type="success"
+      text
+      :value="alertSucces"
+      max-width="1000px"
+    >
             </v-container>
           </v-card-text>
         </v-card>
@@ -66,9 +74,9 @@
       comparePasswords () {
         return this.password !== this.confirmPassword ? 'Passwords do not match' : ''
       },
-      user () {
-        return this.$store.getters.user
-      }
+      //user () {
+       // return this.$store.getters.user
+      //}
     },
     watch: {
       user (value) {
@@ -81,7 +89,7 @@
       
       send: function () {
       this.axios
-        .post("http://192.168.178.21/:8089/user/", {
+        .post("http://192.168.178.21:8089/user/", {
           username: this.username,
           password: this.password,
         })
