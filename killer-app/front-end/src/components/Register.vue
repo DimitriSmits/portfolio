@@ -53,6 +53,8 @@
       :value="alertSucces"
       max-width="1000px"
     >
+      Registered!
+    </v-alert>
             </v-container>
           </v-card-text>
         </v-card>
@@ -67,7 +69,8 @@
       return {
         username: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        alertSucces: false
       }
     },
     computed: {
@@ -90,7 +93,7 @@
       send: function () {
       this.axios
         .post("http://192.168.178.21:8089/user/", {
-          username: this.username,
+          userName: this.username,
           password: this.password,
         })
         .then((response) => {
