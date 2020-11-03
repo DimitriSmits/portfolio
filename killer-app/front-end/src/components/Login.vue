@@ -31,7 +31,7 @@
                 
                 <v-layout row>
                   <v-flex xs12>
-                    <v-btn type="submit">Login</v-btn>
+                    <v-btn @click.native.prevent="login" type="submit">Login</v-btn>
                   </v-flex>
                 </v-layout>
               </form>
@@ -45,27 +45,17 @@
 
 <script>
   export default {
+     name: 'login',
     data () {
       return {
         email: '',
         password: '',
       }
     },
-    computed: {
-      user () {
-        return this.$store.getters.user
-      }
-    },
-    watch: {
-      user (value) {
-        if (value !== null && value !== undefined) {
-          this.$router.push('/')
-        }
-      }
-    },
+
     methods: {
-      onLogin () {
-        this.$store.dispatch('loginUser', {email: this.email, password: this.password})
+      login () {
+        this.$store.dispatch('login', {email: this.email, password: this.password})
       }
     }
   }
