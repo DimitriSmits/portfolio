@@ -25,7 +25,7 @@ services:
       - connact-mariadb:/var/lib/mysql
     environment:
       # create a database at startup
-      MYSQL_DATABASE: "connact"
+      MYSQL_DATABASE: "killerapp"
       # create password for root user which is the only mandatory environment variable
       MYSQL_ROOT_PASSWORD: "mypass"
 
