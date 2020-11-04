@@ -15,15 +15,26 @@ public class User {
     private Long userId;
     private String userName;
     private String password;
+    private String lolname;
     @Lob
     private byte[] salt;
+    @OneToOne(mappedBy = "Stats")
+    private Stats stats;
 
     public User() {
     }
 
-    public User(String userName, String password,byte[] salt) {
+    public User(String userName, String password,String lolname,byte[] salt) {
         this.userName = userName;
         this.password = password;
+        this.lolname = lolname;
         this.salt = salt;
+    }
+    public User(String userName, String password,String lolname,byte[] salt,Stats stats) {
+        this.userName = userName;
+        this.password = password;
+        this.lolname = lolname;
+        this.salt = salt;
+        this.stats = stats;
     }
 }

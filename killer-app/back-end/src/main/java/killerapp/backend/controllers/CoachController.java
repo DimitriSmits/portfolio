@@ -1,10 +1,12 @@
 package killerapp.backend.controllers;
 
+import killerapp.backend.enitities.Coach;
 import killerapp.backend.enitities.Lesson;
 import killerapp.backend.enitities.User;
+import killerapp.backend.models.CoachCreateModel;
 import killerapp.backend.models.UserCreateModel;
+import killerapp.backend.repositories.CoachRepo;
 import killerapp.backend.repositories.UserRepo;
-import killerapp.backend.service.RiotAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,33 +19,44 @@ import java.security.SecureRandom;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping(value="/user")
+@RequestMapping(value="/coaches")
 
-public class UserController {
+public class CoachController {
     @Autowired
-    private UserRepo userRepo;
+    private CoachRepo coachRepo;
     private byte[] saltG;
 
+    @GetMapping(path = "/" )
+    public Iterable<Coach> coaches() {
+        System.out.println("Haalt alle coaches op");
+        return coachRepo.findAll();
+
+    }
+    @GetMapping(path ="/{id}")
+    public Coach one(@PathVariable Long id){
+        System.out.println("Zoekt op dit ID: "+id.toString());
+        return coachRepo.findById(id).get();
+    }
+
+
     @PostMapping("/")
-    public ResponseEntity<?> createUser(@RequestBody UserCreateModel userCreateModel) {
-
-        RiotAPI riotAPI = new RiotAPI();
-        String sumid = riotAPI.getSummonerIDbyName(userCreateModel.getLolname());
+    public ResponseEntity<?> createCoach(@RequestBody CoachCreateModel coachCreateModel) {
 
 
-        if (userCreateModel.getUserName() == null || userCreateModel.getPassword() == null) {
-            System.out.println(userCreateModel.getUserName()+"    :    "+userCreateModel.getPassword());
+
+        if (coachCreateModel.getUserName() == null || coachCreateModel.getPassword() == null||coachCreateModel.getIntro()==null||coachCreateModel.getLolname()==null) {
+            System.out.println(coachCreateModel.getUserName()+"    :    "+coachCreateModel.getPassword());
             return new ResponseEntity<Error>(HttpStatus.NO_CONTENT);
         }
 
         //create salt and create hash for password
         saltG = createsalt();
-        userCreateModel.setSalt(saltG);
-        String generatedHashPassword = hash(userCreateModel.getPassword(),saltG);
+        coachCreateModel.setSalt(saltG);
+        String generatedHashPassword = hash(coachCreateModel.getPassword(),saltG);
 
-        User user = new User(userCreateModel.getUserName(), generatedHashPassword,userCreateModel.getLolname(),userCreateModel.getSalt(),riotAPI.getStatisticsSummonerID(sumid));
-        userRepo.save(user);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        Coach coach = new Coach(coachCreateModel.getUserName(), generatedHashPassword,coachCreateModel.getIntro(),coachCreateModel.getLolname(),coachCreateModel.getSalt());
+        coachRepo.save(coach);
+        return new ResponseEntity<>(coach, HttpStatus.CREATED);
     }
     public String hash(String passwordToHash, byte[] salt){
         String generatedPassword = null;
