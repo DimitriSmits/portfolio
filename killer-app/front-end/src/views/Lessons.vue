@@ -3,11 +3,11 @@
   <div class="pa-md-4 mx-lg-auto">
     
   </div>
-  <LessonsList/>
+  <Lessons v-if="showLessons"/>
+  <SingleLesson v-if="showSingleLesson"/>
     <div class="pa-md-4 mx-lg-auto">
     
   </div>
-  <LessonsList/>
 
   
 </section>
@@ -16,12 +16,24 @@
 </template>
 <script>
 // @ is an alias to /src
-import LessonsList from '@/components/LessonsList.vue'
+import Lessons from '@/components/LessonsIterable.vue'
+import SingleLesson from '@/components/SingleLesson.vue'
 
 export default {
   name: 'Test',
   components: {
-    LessonsList
+    Lessons,
+    SingleLesson
+  },
+  data: () => ({
+     showSingleLesson: false,
+     showLessons: true,
+  }),
+  methods: {
+    hideForm(){
+      this.showSingleLesson = true
+      this.showLessons = false
+    },
   }
 }
 </script>
