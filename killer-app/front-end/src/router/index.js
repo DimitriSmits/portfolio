@@ -7,8 +7,10 @@ import CoachSessions from '../views/CoachSessions.vue'
 import Statistics from '../views/Statistics.vue'
 import Profile from '../views/Profile.vue'
 import Lesson from '../views/Lesson.vue'
+import Coach from '../views/Coach.vue'
 import RegisterPage from '../views/RegisterPage'
 import LoginPage from '../views/LoginPage'
+import RegisterPageCoach from '../views/RegisterPageCoach'
 
 
 
@@ -39,9 +41,19 @@ const routes = [
     component: Coaches
   },
   {
+    path: '/coaches/:id',
+    name: 'Coach',
+    component: Coach
+  },
+  {
     path: '/lessons',
     name: 'Lessons',
     component: Lessons
+  },
+  {
+    path: '/lessons/:id',
+    name: 'Lesson',
+    component: Lesson
   },
   {
     path: '/CoachSessions',
@@ -59,14 +71,14 @@ const routes = [
     component: Profile
   },
   {
-    path: '/lessons/:id',
-    name: 'Lesson',
-    component: Lesson
-  },
-  {
     path: '/RegisterPage',
     name: 'RegisterPage',
     component: RegisterPage
+  },
+  {
+    path: '/RegisterPageCoach',
+    name: 'RegisterPageCoach',
+    component: RegisterPageCoach
   },
   {
     path: '/LoginPage',

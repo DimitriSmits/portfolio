@@ -19,6 +19,23 @@
     <v-main>
       <router-view></router-view>
     </v-main>
+    <v-footer
+    dark
+    flat
+    padless
+  >
+    <v-row justify="center"    no-gutters  >
+      <v-btn   color="white" text   rounded  class="my-2"    >
+      About us
+      </v-btn>
+      <v-btn   to="/RegisterPageCoach" color="white" text   rounded  class="my-2"    >
+      Coaching Options
+      </v-btn>
+      <v-btn   color="white" text   rounded  class="my-2"    >
+      Contact us
+      </v-btn> 
+    </v-row>
+  </v-footer>
   </v-app>
 </template>
 

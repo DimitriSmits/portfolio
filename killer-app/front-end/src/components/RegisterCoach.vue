@@ -40,10 +40,22 @@
                   </v-flex>
                 </v-layout>
                 <v-layout row>
+                    Schrijf een kleine intro over jezelf, zodat spelers beter weten wat ze kunnen verwachten
                   <v-flex xs12>
                     <v-text-field
-                      name="lolname"
-                      label="lolname"
+                      name="intro"
+                      label="intro"
+                      id="intro"
+                      v-model="intro"
+                      type="intro"
+                      required></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex xs12>
+                    <v-text-field
+                      name="LOL Summoner Name"
+                      label="LOL Summoner Name"
                       id="lolname"
                       v-model="lolname"
                       type="lolname"
@@ -80,8 +92,9 @@
       return {
         username: '',
         password: '',
-        lolname:'',
         confirmPassword: '',
+        lolname:'',
+        intro:'',
         alertSucces: false
       }
     },
@@ -104,10 +117,11 @@
       
       send: function () {
       this.axios
-        .post("http://192.168.178.21:8089/user/", {
+        .post("http://192.168.178.21:8089/coaches/", {
           userName: this.username,
           password: this.password,
-          lolname: this.lolname
+          intro:this.intro,
+          lolname:this.lolname
         })
         .then((response) => {
           console.log(response.status);
