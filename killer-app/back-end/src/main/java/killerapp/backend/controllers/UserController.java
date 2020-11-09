@@ -20,6 +20,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -36,9 +37,6 @@ public class UserController {
     @GetMapping(path ="/{id}")
     public User one(@PathVariable Long id){
 
-        User user2 = userRepo.findByUserName("Henkie");
-        System.out.println(user2.getUserName()+"    NEEEEEEEEEEEEEEEEEEEEEEE");
-
         System.out.println("Zoekt op dit ID: "+id.toString());
         User user = userRepo.findById(id).get();
         System.out.println("Salt:  "+user.getSalt()+"   "+saltG);
@@ -54,7 +52,7 @@ public class UserController {
 
         if(user.getPassword().equals(password)){
             System.out.println("WACHTWOORD KLOPT");
-            user.setPassword("")
+            user.setPassword("");
             user.setSalt("");
             System.out.println(user.getUserId()+ "  "+ user.getUserName()+"   "+user.getLolname());
 
