@@ -9,11 +9,11 @@
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
-                      name="email"
-                      label="Mail"
-                      id="email"
-                      v-model="email"
-                      type="email"
+                      name="username"
+                      label="username"
+                      id="username"
+                      v-model="username"
+                      type="username"
                       required></v-text-field>
                   </v-flex>
                 </v-layout>
@@ -27,13 +27,14 @@
                       type="password"
                       required></v-text-field>
                   </v-flex>
-                </v-layout>
-                
+                </v-layout> 
                 <v-layout row>
+                  {{userid}}
                   <v-flex xs12>
-                    <v-btn @click.native.prevent="login" type="submit">Login</v-btn>
+                    <v-btn @click.native.prevent="send" type="submit">Login</v-btn>
                   </v-flex>
                 </v-layout>
+                
               </form>
             </v-container>
           </v-card-text>
@@ -46,9 +47,16 @@
 <script>
   export default {
      name: 'login',
+     computed:{
+        userid: {
+       get () {
+        return this.$store.state.userid
+          }
+     },
+     },
     data () {
       return {
-        email: '',
+        username: '',
         password: '',
       }
     },
@@ -56,7 +64,27 @@
     methods: {
       login () {
         this.$store.dispatch('login', {email: this.email, password: this.password})
-      }
+      },
+      send: function () {
+      this.axios
+        .post("http://192.168.178.21:8089/user/login", {
+          userName: this.username,
+          password: this.password,  
+        })
+        .then((response) => {
+          this.username = response.data.userName
+          this.$store.commit('updateUserid', response.data.userId)
+          console.log(response.status + 'statussss');
+          console.log(response.data.lolname + 'ID');
+         
+          if (response.status !== 204) {
+            this.alertSucces = true;
+          }
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    },
     }
   }
 </script>

@@ -13,6 +13,7 @@ Vue.use(VueAxios, axios);
 
 
 new Vue({
+  el:'#app',
   router,
   axios,
   VueAxios,
