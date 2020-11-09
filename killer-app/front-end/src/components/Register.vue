@@ -86,6 +86,9 @@
       }
     },
     computed: {
+      userID(){
+        return this.$store.state.userid
+      },
       comparePasswords () {
         return this.password !== this.confirmPassword ? 'Passwords do not match' : ''
       },
