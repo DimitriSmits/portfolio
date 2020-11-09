@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class RiotAPI {
     private static HttpsURLConnection connection;
-    private String apikey = "?api_key=RGAPI-d832e6ee-5e35-4c30-9d41-3d3c62e09e50";
+    private String apikey = "?api_key=RGAPI-0e9dd59e-787e-47a5-a5f0-0ab5b1148b8f";
     public String getSummonerIDbyName(String summonername){
         String url = "https://euw1.api.riotgames.com//lol/summoner/v4/summoners/by-name/"+summonername+apikey;
         String summonerID = parseSummonerID(getResponseContent(url));
@@ -32,19 +32,15 @@ public class RiotAPI {
             String tier = statistic.getString("tier");
             String rank = statistic.getString("rank");
             String summonerId = statistic.getString("summonerId");
-            String leaguePointsString = statistic.getString("leaguePoints");
-            String winsString = statistic.getString("wins");
-            String lossesString = statistic.getString("losses");
+            Integer leaguePointsString = statistic.getInt("leaguePoints");
+            Integer winsString = statistic.getInt("wins");
+            Integer lossesString = statistic.getInt("losses");
 
-            int leaguePoints = Integer.parseInt(leaguePointsString);
+            /*int leaguePoints = Integer.parseInt(leaguePointsString);
             int wins = Integer.parseInt(winsString);
-            int losses = Integer.parseInt(lossesString);
+            int losses = Integer.parseInt(lossesString);*/
 
-            stats = new Stats(queueType,tier,rank,summonerId,leaguePoints,wins,losses);
-
-
-            System.out.println("Stats aangemaakt");
-            System.out.println(tier);
+            stats = new Stats(queueType,tier,rank,summonerId,leaguePointsString,winsString,lossesString);
         }
         return stats;
     }
@@ -54,8 +50,6 @@ public class RiotAPI {
         for(int i = 0;i<ids.length();i++){
             JSONObject idObject = ids.getJSONObject(i);
             id = idObject.getString("id");
-            System.out.println("jajajajajajajaj");
-            System.out.println(id);
         }
         return id;
     }
@@ -86,8 +80,6 @@ public class RiotAPI {
                 }
                 reader.close();
             }
-            System.out.println("JAJAJAJAJAJAJAJAJAJAJAJAJA");
-            System.out.println(responseContent.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
