@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class RiotAPI {
     private static HttpsURLConnection connection;
-    private String apikey = "?api_key=RGAPI-0e9dd59e-787e-47a5-a5f0-0ab5b1148b8f";
+    private String apikey = "?api_key=RGAPI-448063d3-9b0f-4582-b31e-542af2b99239";
     public String getSummonerIDbyName(String summonername){
         String url = "https://euw1.api.riotgames.com//lol/summoner/v4/summoners/by-name/"+summonername+apikey;
         String summonerID = parseSummonerID(getResponseContent(url));
