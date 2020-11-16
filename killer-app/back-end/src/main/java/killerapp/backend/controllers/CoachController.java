@@ -2,10 +2,13 @@ package killerapp.backend.controllers;
 
 import killerapp.backend.enitities.Coach;
 import killerapp.backend.enitities.Lesson;
+import killerapp.backend.enitities.Request;
 import killerapp.backend.enitities.User;
 import killerapp.backend.models.CoachCreateModel;
+import killerapp.backend.models.RequestCreateModel;
 import killerapp.backend.models.UserCreateModel;
 import killerapp.backend.repositories.CoachRepo;
+import killerapp.backend.repositories.RequestRepo;
 import killerapp.backend.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +27,10 @@ import java.security.SecureRandom;
 public class CoachController {
     @Autowired
     private CoachRepo coachRepo;
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private RequestRepo requestRepo;
     private byte[] saltG;
 
     @GetMapping(path = "/" )
@@ -38,11 +45,8 @@ public class CoachController {
         return coachRepo.findById(id).get();
     }
 
-
     @PostMapping("/")
     public ResponseEntity<?> createCoach(@RequestBody CoachCreateModel coachCreateModel) {
-
-
 
         if (coachCreateModel.getUserName() == null || coachCreateModel.getPassword() == null||coachCreateModel.getIntro()==null||coachCreateModel.getLolname()==null) {
             System.out.println(coachCreateModel.getUserName()+"    :    "+coachCreateModel.getPassword());
@@ -57,6 +61,24 @@ public class CoachController {
         Coach coach = new Coach(coachCreateModel.getUserName(), generatedHashPassword,coachCreateModel.getIntro(),coachCreateModel.getLolname(),coachCreateModel.getSalt());
         coachRepo.save(coach);
         return new ResponseEntity<>(coach, HttpStatus.CREATED);
+    }
+    @PostMapping("/request")
+    public ResponseEntity<?> createRequest(@RequestBody RequestCreateModel requestCreateModel) {
+
+        System.out.println("JAJAJAJAJAJA?");
+
+        if (requestCreateModel.getUserId()==null || requestCreateModel.getCoachId()==null ||
+                requestCreateModel.getQuestion()==null || requestCreateModel.getAccepted()==null){
+            return new ResponseEntity<Error>(HttpStatus.NO_CONTENT);
+        }
+
+        User user = userRepo.findById(requestCreateModel.getUserId()).get();
+        Coach coach = coachRepo.findById(requestCreateModel.getCoachId()).get();
+        System.out.println(user.getUserId() + "        IDS     "+ coach.getCoachId());
+
+        Request request = new Request(user, coach,requestCreateModel.getQuestion(),requestCreateModel.getAccepted());
+        requestRepo.save(request);
+        return new ResponseEntity<>(request, HttpStatus.CREATED);
     }
     public String hash(String passwordToHash, byte[] salt){
         String generatedPassword = null;
