@@ -1,13 +1,12 @@
 package killerapp.backend.models;
 
 import lombok.Data;
+
 @Data
-public class CoachCreateModel {
+public class CoachEditModel {
+    private Long coachId;
     private String userName;
-    private String password;
     private String intro;
     private String lolname;
-    private String salt;
 
 }
-

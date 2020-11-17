@@ -3,8 +3,10 @@ package killerapp.backend.controllers;
 import killerapp.backend.enitities.Request;
 import killerapp.backend.enitities.Stats;
 import killerapp.backend.models.RequestEditModel;
+import killerapp.backend.repositories.CoachRepo;
 import killerapp.backend.repositories.RequestRepo;
 import killerapp.backend.repositories.StatsRepo;
+import killerapp.backend.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,29 @@ import java.util.List;
 public class SessionsController {
     @Autowired
     private RequestRepo requestRepo;
-    @GetMapping(path = "/" )
-    public Iterable<Request> requests() {
+    @Autowired
+    private CoachRepo coachRepo;
+    @Autowired
+    private UserRepo userRepo;
+
+
+
+    @GetMapping(path ="/c/{id}")
+    public Iterable<Request> requestsCoach(@PathVariable Long id) {
         System.out.println("Haalt alle requests op");
-        return requestRepo.findAll();
+        return requestRepo.findAllByCoachAndAccepted(coachRepo.findById(id).get(),false);
+
+    }
+    @GetMapping(path ="/ct/{id}")
+    public Iterable<Request> sessionsCoach(@PathVariable Long id) {
+        System.out.println("Haalt alle requests op");
+        return requestRepo.findAllByCoachAndAccepted(coachRepo.findById(id).get(),true);
+
+    }
+    @GetMapping(path ="/u/{id}")
+    public Iterable<Request> requestsUser(@PathVariable Long id) {
+        System.out.println("Haalt alle requests op");
+        return requestRepo.findAllByUserAndAccepted(userRepo.findById(id).get(),true);
 
     }
     @PutMapping(path = "/")
