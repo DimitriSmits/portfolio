@@ -2,8 +2,8 @@
   <v-container>
     <v-row class="text-center">
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">login</h1>
-        <login/>
+        <h1 class="display-2 font-weight-bold mb-3">Coach login</h1>
+        <loginCoach/>
       </v-col>
     </v-row>
   </v-container>
@@ -11,12 +11,12 @@
 
 <script>
 // @ is an alias to /src
-import login from '@/components/user/Login.vue'
+import loginCoach from '@/components/coach/LoginCoach.vue'
 
 export default {
   name: 'test',
   components: {
-    login
+    loginCoach
   }
 }
 </script>

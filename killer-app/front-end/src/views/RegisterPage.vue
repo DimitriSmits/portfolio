@@ -11,7 +11,7 @@
 
 <script>
 // @ is an alias to /src
-import register from '@/components/Register.vue'
+import register from '@/components/user/Register.vue'
 
 export default {
   name: 'test',

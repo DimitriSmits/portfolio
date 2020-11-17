@@ -29,13 +29,23 @@
                   </v-flex>
                 </v-layout> 
                 <v-layout row>
-                  {{userid}}
+                  {{coachid}}
                   <v-flex xs12>
                     <v-btn @click.native.prevent="send" type="submit">Login</v-btn>
                   </v-flex>
                 </v-layout>
                 
               </form>
+              <v-alert
+             class="elevation-12 mx-auto"
+             outlined
+             type="success"
+             text
+             :value="alertSucces"
+             max-width="1000px"
+            >
+              Logged in!
+             </v-alert>
             </v-container>
           </v-card-text>
         </v-card>
@@ -48,9 +58,9 @@
   export default {
      name: 'login',
      computed:{
-        userid: {
+        coachid: {
        get () {
-        return this.$store.state.userid
+        return this.$store.state.coachid
           }
      },
      },
@@ -58,6 +68,7 @@
       return {
         username: '',
         password: '',
+        alertSucces: false,
       }
     },
 
@@ -67,13 +78,13 @@
       },
       send: function () {
       this.axios
-        .post("http://192.168.178.21:8089/user/login", {
+        .post("http://192.168.178.21:8089/coaches/login", {
           userName: this.username,
           password: this.password,  
         })
         .then((response) => {
           this.username = response.data.userName
-          this.$store.commit('updateUserid', response.data.userId)
+          this.$store.commit('updateCoachid', response.data.coachId)
           console.log(response.status + 'statussss');
           console.log(response.data.lolname + 'ID');
          

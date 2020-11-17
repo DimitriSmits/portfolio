@@ -13,34 +13,13 @@
                       label="username"
                       id="username"
                       v-model="username"
+                      :placeholder="currentCoach.userName"
                       type="username"
                       required></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-layout row>
-                  <v-flex xs12>
-                    <v-text-field
-                      name="password"
-                      label="Password"
-                      id="password"
-                      v-model="password"
-                      type="password"
-                      required></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs12>
-                    <v-text-field
-                      name="confirmPassword"
-                      label="Confirm Password"
-                      id="confirmPassword"
-                      v-model="confirmPassword"
-                      type="password"
-                      :rules="[comparePasswords]"></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                    Schrijf een kleine intro over jezelf, zodat spelers beter weten wat ze kunnen verwachten
+                    
                   <v-flex xs12>
                     <v-text-field
                       name="intro"
@@ -48,6 +27,7 @@
                       id="intro"
                       v-model="intro"
                       type="intro"
+                      :placeholder="currentCoach.intro"
                       required></v-text-field>
                   </v-flex>
                 </v-layout>
@@ -55,18 +35,22 @@
                   <v-flex xs12>
                     <v-text-field
                       name="LOL Summoner Name"
-                      label="LOL Summoner Name"
+                      
                       id="lolname"
                       v-model="lolname"
                       type="lolname"
+                      :placeholder="currentCoach.lolname"
                       required></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-btn @click="send">Sign up</v-btn>
+                    <v-btn @click="editProfile()">Edit profile</v-btn>
                   </v-flex>
                 </v-layout>
+                <br>
+                
+               
               </form>
               <v-alert
       class="elevation-12 mx-auto"
@@ -91,11 +75,10 @@
     data () {
       return {
         username: '',
-        password: '',
-        confirmPassword: '',
         lolname:'',
         intro:'',
-        alertSucces: false
+        alertSucces: false,
+        currentCoach:null
       }
     },
     computed: {
@@ -114,25 +97,37 @@
       }
     },
     methods: {
-      
-      send: function () {
+    editProfile: function () {
       this.axios
-        .post("http://192.168.178.21:8089/coaches/", {
-          userName: this.username,
-          password: this.password,
-          intro:this.intro,
-          lolname:this.lolname
-        })
-        .then((response) => {
-          console.log(response.status);
-          if (response.status !== 204) {
-            this.alertSucces = true;
-          }
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
+        .put(
+          "http://192.168.178.21:8089/coaches/",
+          {
+            coachId: this.$store.state.coachid,
+            userName: this.username,
+            intro:this.intro,
+            lolname:this.lolname
+            
+          })
+          .then(response => {
+            console.log(response.status);
+           
+          })
+          .catch(error => {
+            console.log(error.response)
+          })
     },
+    getCoach(id){
+        this.axios
+        .get("http://192.168.178.21:8089/coaches/"+id)
+        .then((response) => (
+            this.currentCoach = response.data));
+
+             
+        },  
+    },
+    mounted(){
+        this.getCoach(this.$store.state.coachid);
+   
     }
   }
 </script>

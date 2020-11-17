@@ -17,18 +17,19 @@
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="180px"
             >
-              <v-card-title v-text="card.coach.username"></v-card-title>
+              <v-card-title v-text="card.user.username"></v-card-title>
             </v-img>
             <v-card-text>
               <div>
                 Summonername
-                {{card.coach.lolname}}
+                {{card.user.lolname}}
               </div>
             </v-card-text>
             <v-card-actions>
               <router-link :to="{path: '/Coaches/' + card.coach.coachId}" tag="v-btn"> 
               <v-btn text>Details</v-btn>
               </router-link>
+              <v-btn @click.native.prevent="editProfile(card.id)" text>Accept</v-btn>
 
               <v-spacer></v-spacer>
             </v-card-actions>
@@ -48,9 +49,26 @@ export default {
   methods: {
     loadSessions: function () {
       this.axios
-        .get("http://192.168.178.21:8089/coachsessions/u/"+this.$store.state.userid)
+        .get("http://192.168.178.21:8089/coachsessions/c/"+this.$store.state.coachid)
         .then((response) => (this.cards = response.data));
     },
+    editProfile: function (id) {
+      this.axios
+        .put(
+          "http://192.168.178.21:8089/coachsessions/",
+          {
+            id: id,
+            accepted: true,
+            
+          })
+          .then(response => {
+            console.log(response.status);
+            this.$router.push('CoachSessions')
+          })
+          .catch(error => {
+            console.log(error.response)
+          })
+    }
   },
   data: () => ({
     cards: [],

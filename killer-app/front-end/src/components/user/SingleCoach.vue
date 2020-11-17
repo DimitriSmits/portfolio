@@ -22,6 +22,16 @@
                       required></v-text-field>
                   </v-flex>
                 </v-layout>
+                <v-alert
+             class="elevation-12 mx-auto"
+             outlined
+             type="success"
+             text
+             :value="alertSucces"
+             max-width="1000px"
+            >
+              Request sent
+             </v-alert>
         </div>
         <v-btn @click.native.prevent="join">Request Lesson</v-btn>
 
@@ -43,6 +53,7 @@ export default {
             currentCoach:null,
             message:'',
             question: '',
+            alertSucces: false,
         };
     },
     methods:{

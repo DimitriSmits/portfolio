@@ -6,15 +6,25 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-      userid: 'test',
+      userid: null,
+      coachid:null,
       user: null,
   },
   mutations: {
-    updateUserid (state, message) {
+      updateUserid (state, message) {
         state.userid = message
-        console.log(this.userid+'dsdsff')
+      },
+      logoutUser(state){
+       state.userid = null
+      },
+      updateCoachid(state, message){
+      state.coachid = message
+      },
+      logoutCoach(state){
+        state.coachid = null
       }
      },
+     
   actions: {
       
   },

@@ -17,12 +17,12 @@
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="180px"
             >
-              <v-card-title v-text="card.coach.username"></v-card-title>
+              <v-card-title v-text="card.user.username"></v-card-title>
             </v-img>
             <v-card-text>
               <div>
                 Summonername
-                {{card.coach.lolname}}
+                {{card.user.lolname}}
               </div>
             </v-card-text>
             <v-card-actions>
@@ -48,7 +48,7 @@ export default {
   methods: {
     loadSessions: function () {
       this.axios
-        .get("http://192.168.178.21:8089/coachsessions/u/"+this.$store.state.userid)
+        .get("http://192.168.178.21:8089/coachsessions/ct/"+this.$store.state.coachid)
         .then((response) => (this.cards = response.data));
     },
   },

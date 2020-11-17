@@ -11,6 +11,8 @@ import Coach from '../views/Coach.vue'
 import RegisterPage from '../views/RegisterPage'
 import LoginPage from '../views/LoginPage'
 import RegisterPageCoach from '../views/RegisterPageCoach'
+import LoginPageCoach from '../views/LoginPageCoach'
+import Requests from '../views/Requests'
 
 
 
@@ -81,9 +83,19 @@ const routes = [
     component: RegisterPageCoach
   },
   {
+    path: '/LoginPageCoach',
+    name: 'LoginPageCoach',
+    component: LoginPageCoach
+  },
+  {
     path: '/LoginPage',
     name: 'LoginPage',
     component: LoginPage
+  },
+  {
+    path: '/Requests',
+    name: 'Requests',
+    component: Requests
   }
 
   

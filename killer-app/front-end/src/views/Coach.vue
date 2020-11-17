@@ -12,7 +12,7 @@
 
 <script>
 //@ is an alias to /src
-import SingleCoach from '@/components/SingleCoach.vue'
+import SingleCoach from '@/components/user/SingleCoach.vue'
 
 export default {
  name: 'Coach',
