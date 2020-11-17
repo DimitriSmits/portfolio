@@ -103,32 +103,6 @@ public class UserController {
         user.setPassword(null);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
-
-    /*@PostMapping("/login")
-    public ResponseEntity<?> createUser(@RequestBody UserCreateModel userCreateModel) {
-        RiotAPI riotAPI = new RiotAPI();
-
-        //Riot api aanroepen
-        String sumid = riotAPI.getSummonerIDbyName(userCreateModel.getLolname());
-        Stats stats =  riotAPI.getStatisticsSummonerID(sumid);
-
-
-        if (userCreateModel.getUserName() == null || userCreateModel.getPassword() == null) {
-            System.out.println(userCreateModel.getUserName()+"    :    "+userCreateModel.getPassword());
-            return new ResponseEntity<Error>(HttpStatus.NO_CONTENT);
-        }
-
-
-
-        String generatedHashPassword = hash(userCreateModel.getPassword(),saltG);
-        if(generatedHashPassword==user.getpassword)
-        System.out.println("SALTTTTTTTTTTTTTTTTTTTTTTTTTT: "+saltG);
-
-
-        user.setSalt(null);
-        user.setPassword(null);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
-    }*/
     public String hash(String passwordToHash, byte[] salt){
         String generatedPassword = null;
         try {
@@ -141,14 +115,6 @@ public class UserController {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             generatedPassword = sb.toString();
-            /*String s = bytetoString(saltG);
-            System.out.println(s + "  DIT IS SSSSS");
-            byte[] yikes = stringToByte(s);
-            String a = bytetoString(yikes);
-            System.out.println(a + "DIT IS AAAA");
-            generatedPassword = generatedPassword + bytetoString(saltG);
-            System.out.println(generatedPassword);
-            System.out.println(generatedPassword.replace(bytetoString(saltG),""));*/
         }
         catch (NoSuchAlgorithmException e){
             e.printStackTrace();

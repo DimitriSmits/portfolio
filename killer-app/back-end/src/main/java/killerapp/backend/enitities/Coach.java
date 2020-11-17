@@ -20,7 +20,7 @@ public class Coach{
     private String intro;
     private String lolname;
     @Lob
-    private byte[] salt;
+    private String salt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "coach")
@@ -29,7 +29,7 @@ public class Coach{
     public Coach() {
     }
 
-    public Coach(String userName, String password,String intro,String lolname,byte[] salt) {
+    public Coach(String userName, String password,String intro,String lolname,String salt) {
         this.userName = userName;
         this.password = password;
         this.intro = intro;
