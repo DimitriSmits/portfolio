@@ -1,7 +1,6 @@
 package killerapp.backend.controllers;
 
 import killerapp.backend.enitities.Coach;
-import killerapp.backend.enitities.Lesson;
 import killerapp.backend.enitities.Request;
 import killerapp.backend.enitities.User;
 import killerapp.backend.models.*;
@@ -44,7 +43,7 @@ public class CoachController {
     }
     @PutMapping(path = "/")
     public ResponseEntity<?> editCoach(@RequestBody CoachEditModel coachEditModel){
-        System.out.println("Edit profile started");
+        System.out.println("Edit coach started");
         Coach coach = coachRepo.findById(coachEditModel.getCoachId()).get();
         System.out.println("Found request");
         coach.setUserName(coachEditModel.getUserName());
@@ -63,7 +62,7 @@ public class CoachController {
         String password = hash(coachCreateModel.getPassword(),stringToByte(coach.getSalt()));
 
         if(coach.getPassword().equals(password)){
-            System.out.println("WACHTWOORD KLOPT");
+            System.out.println("Password correct");
             coach.setPassword("");
             coach.setSalt("");
             System.out.println(coach.getCoachId()+ "  "+ coach.getUserName()+"   "+coach.getLolname());
@@ -72,7 +71,7 @@ public class CoachController {
         }
         else{
             //wachtwoord klopt
-            System.out.println("WACHTWOORD KLOPT NIET");
+            System.out.println("Password incorrect");
             return new ResponseEntity<Error>(HttpStatus.NO_CONTENT);
         }
     }
@@ -91,22 +90,16 @@ public class CoachController {
         String finalsalt = bytetoString(bytedsalt);
         coachCreateModel.setSalt(finalsalt);
         String generatedHashPassword = hash(coachCreateModel.getPassword(),stringToByte(finalsalt));
-        System.out.println("SALTTT: "+finalsalt);
 
         Coach coach = new Coach(coachCreateModel.getUserName(), generatedHashPassword,coachCreateModel.getIntro(),coachCreateModel.getLolname(),coachCreateModel.getSalt());
         coachRepo.save(coach);
         String password = hash(coachCreateModel.getPassword(),stringToByte(finalsalt));
-        if(password.equals(generatedHashPassword)){
-            System.out.println("HIER KLOPT HET NOG WEL");
-        }
         coach.setSalt(null);
         coach.setPassword(null);
         return new ResponseEntity<>(coach, HttpStatus.CREATED);
     }
     @PostMapping("/request")
     public ResponseEntity<?> createRequest(@RequestBody RequestCreateModel requestCreateModel) {
-
-        System.out.println("JAJAJAJAJAJA?");
 
         if (requestCreateModel.getUserId()==null || requestCreateModel.getCoachId()==null ||
                 requestCreateModel.getQuestion()==null || requestCreateModel.getAccepted()==null){
@@ -117,7 +110,7 @@ public class CoachController {
         Coach coach = coachRepo.findById(requestCreateModel.getCoachId()).get();
         System.out.println(user.getUserId() + "        IDS     "+ coach.getCoachId());
 
-        Request request = new Request(user, coach,requestCreateModel.getQuestion(),requestCreateModel.getAccepted());
+        Request request = new Request(user, coach,requestCreateModel.getQuestion(),requestCreateModel.getAccepted(),true,null);
         requestRepo.save(request);
         return new ResponseEntity<>(request, HttpStatus.CREATED);
     }

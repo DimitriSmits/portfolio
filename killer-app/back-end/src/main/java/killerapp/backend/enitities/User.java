@@ -16,6 +16,7 @@ public class User {
     @GeneratedValue
     @Column(name = "userId")
     private Long userId;
+    @Column(unique=true)
     private String userName;
     private String password;
     private String lolname;

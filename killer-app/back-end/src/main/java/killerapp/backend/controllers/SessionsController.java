@@ -1,18 +1,14 @@
 package killerapp.backend.controllers;
 
 import killerapp.backend.enitities.Request;
-import killerapp.backend.enitities.Stats;
 import killerapp.backend.models.RequestEditModel;
 import killerapp.backend.repositories.CoachRepo;
 import killerapp.backend.repositories.RequestRepo;
-import killerapp.backend.repositories.StatsRepo;
 import killerapp.backend.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -47,11 +43,22 @@ public class SessionsController {
 
     }
     @PutMapping(path = "/")
-    public ResponseEntity<?> editProfile(@RequestBody RequestEditModel requestEditModel){
-        System.out.println("Edit profile started");
+    public ResponseEntity<?> acceptRequest(@RequestBody RequestEditModel requestEditModel){
+        System.out.println("Request setting accepter");
         Request request = requestRepo.findById(requestEditModel.getId()).get();
         System.out.println("Found request");
         request.setAccepted(requestEditModel.getAccepted());
+
+        requestRepo.save(request);
+        return new ResponseEntity<>(request, HttpStatus.OK);
+    }
+    @PutMapping(path = "/close")
+    public ResponseEntity<?> closeSession(@RequestBody RequestEditModel requestEditModel){
+        System.out.println("Close session and add feedback");
+        Request request = requestRepo.findById(requestEditModel.getId()).get();
+        System.out.println("Found request");
+        request.setActive(false);
+        request.setFeedback(requestEditModel.getFeedback());
 
         requestRepo.save(request);
         return new ResponseEntity<>(request, HttpStatus.OK);

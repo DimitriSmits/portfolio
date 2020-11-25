@@ -86,15 +86,10 @@ public class UserController {
         String finalsalt = bytetoString(bytedsalt);
         userCreateModel.setSalt(finalsalt);
         String generatedHashPassword = hash(userCreateModel.getPassword(),stringToByte(finalsalt));
-        System.out.println("SALTTT: "+finalsalt);
 
         User user = new User(userCreateModel.getUserName(), generatedHashPassword,userCreateModel.getLolname(),userCreateModel.getSalt());
         userRepo.save(user);
         String password = hash(userCreateModel.getPassword(),stringToByte(finalsalt));
-        if(password.equals(generatedHashPassword)){
-            System.out.println("HIER KLOPT HET NOG WEL");
-        }
-        //userRepo.flush();
 
         //Save stats in DB
         stats.setUser(user);
@@ -121,11 +116,6 @@ public class UserController {
         }
         return generatedPassword;
     }
-
-    /*public boolean checkPassword(String hash, byte[] salt){
-        String generatedHash = hash(hash, salt);
-        return hashh.equals(generatedHash);
-    }*/
     public byte[] createsalt(){
         SecureRandom random = new SecureRandom();
         saltG = new byte[20];
