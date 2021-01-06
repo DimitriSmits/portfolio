@@ -1,41 +1,33 @@
 <template>
 
     <v-container >
-        <h1 align="center">
-            {{currentCoach.userName}}
-        </h1><br>
-        <div align="center">
-  </div>
-  
-        <div class="grey--text mb-2" align="center">
-                      {{currentCoach.lolname}}<br>
-                      {{currentCoach.intro}}<br><br><br><br>
-                      <v-layout row>
-                    Ask a question to the coach and send a request!
-                  <v-flex xs12>
-                    <v-text-field
-                      name="question"
-                      label="question"
+      <v-card class="elevation-12 mx-auto" max-width="600">
+        <v-toolbar class="toolbarname" color="#272727">
+        <v-toolbar-title color="#69bdd2">{{currentCoach.userName}}</v-toolbar-title>
+      </v-toolbar>
+      <v-card-title>
+        {{currentCoach.lolname}}
+      </v-card-title>
+      <v-card-text>
+      {{currentCoach.intro}}
+      </v-card-text>
+      <v-card-title>
+        Request
+      </v-card-title>
+      <v-card-text>
+      Ask a question to the coach and send a request!
+      </v-card-text>
+      <v-text-field name="question"
+                      label=""
                       id="question"
                       v-model="question"
                       type="question"
-                      required></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-alert
-             class="elevation-12 mx-auto"
-             outlined
-             type="success"
-             text
-             :value="alertSucces"
-             max-width="1000px"
-            >
-              Request sent
-             </v-alert>
-        </div>
-        <v-btn @click.native.prevent="join">Request Lesson</v-btn>
-
+                      required>
+      </v-text-field>
+      <v-btn @click.native.prevent="join">Request Session</v-btn>
+      </v-card>
     </v-container>
+    
 
 </template>
 <script>
@@ -88,3 +80,8 @@ export default {
     }
 };
 </script>
+<style scoped>
+.toolbarname{
+  color: #69bdd2;
+}
+</style>

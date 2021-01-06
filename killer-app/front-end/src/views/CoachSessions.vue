@@ -1,7 +1,6 @@
 <template>
 <section>
   <div >
-    <h1>Coachsessions</h1>
     <Sessions v-if="this.$store.state.userid!=null"/>
     <PlayerSessions v-else-if="this.$store.state.coachid!=null"/>
   </div>

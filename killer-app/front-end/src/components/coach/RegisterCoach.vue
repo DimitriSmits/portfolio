@@ -64,6 +64,17 @@
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
+                    <v-text-field
+                      name="Discord name and tag"
+                      label="Discord"
+                      id="discord"
+                      v-model="discord"
+                      type="discord"
+                      required></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex xs12>
                     <v-btn @click="send">Sign up</v-btn>
                   </v-flex>
                 </v-layout>
@@ -96,6 +107,7 @@
         password: '',
         confirmPassword: '',
         lolname:'',
+        discord:'',
         intro:'',
         alertSucces: false
       }
@@ -123,7 +135,8 @@
           userName: this.username,
           password: this.password,
           intro:this.intro,
-          lolname:this.lolname
+          lolname:this.lolname,
+          discord:this.discord
         })
         .then((response) => {
           console.log(response.status);

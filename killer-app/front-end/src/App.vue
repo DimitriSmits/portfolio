@@ -1,5 +1,4 @@
 <template>
-  
   <div>
   <Navbar v-if="this.userid!=null"></Navbar>
   
@@ -8,6 +7,7 @@
 
 
   </div>
+
 
 </template>
 
@@ -43,4 +43,6 @@ export default {
   }),
 };
 </script>
+<style>
+</style>
 

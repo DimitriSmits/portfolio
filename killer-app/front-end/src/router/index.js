@@ -13,6 +13,8 @@ import LoginPage from '../views/LoginPage'
 import RegisterPageCoach from '../views/RegisterPageCoach'
 import LoginPageCoach from '../views/LoginPageCoach'
 import Requests from '../views/Requests'
+import SingleSessionPage from '../views/SingleSessionPage'
+
 
 
 
@@ -96,6 +98,11 @@ const routes = [
     path: '/Requests',
     name: 'Requests',
     component: Requests
+  },
+  {
+    path: '/SingleSession',
+    name: 'SingleSession',
+    component: SingleSessionPage
   }
 
   

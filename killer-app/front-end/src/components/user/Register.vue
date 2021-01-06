@@ -2,6 +2,11 @@
   <v-container>
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
+        <v-toolbar  class="toolbarname" color="#272727">
+            <v-spacer></v-spacer>
+            <v-toolbar-title class="justify-center " >Login</v-toolbar-title>
+            <v-spacer></v-spacer>
+        </v-toolbar>
         <v-card>
           <v-card-text>
             <v-container>
@@ -52,20 +57,31 @@
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
+                    <v-text-field
+                      name="Discord name and tag"
+                      label="Discord name + tag"
+                      id="discord"
+                      v-model="discord"
+                      type="discord"
+                      required></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex xs12>
                     <v-btn @click="send">Sign up</v-btn>
                   </v-flex>
                 </v-layout>
               </form>
               <v-alert
-      class="elevation-12 mx-auto"
-      outlined
-      type="success"
-      text
-      :value="alertSucces"
-      max-width="1000px"
-    >
-      Registered!
-    </v-alert>
+             class="elevation-12 mx-auto"
+             outlined
+             type="success"
+             text
+             :value="alertSucces"
+             max-width="1000px"
+            >
+              Registered!
+             </v-alert>
             </v-container>
           </v-card-text>
         </v-card>
@@ -81,6 +97,7 @@
         username: '',
         password: '',
         lolname:'',
+        discord:'',
         confirmPassword: '',
         alertSucces: false
       }
@@ -110,12 +127,14 @@
         .post("http://192.168.178.21:8089/user/", {
           userName: this.username,
           password: this.password,
-          lolname: this.lolname
+          lolname: this.lolname,
+          discord: this.discord
         })
         .then((response) => {
           console.log(response.status);
           if (response.status !== 204) {
             this.alertSucces = true;
+            this.$router.push('LoginPage') 
           }
         })
         .catch((error) => {
@@ -125,3 +144,8 @@
     }
   }
 </script>
+<style scoped>
+.toolbarname{
+  color: #69bdd2;
+}
+</style>

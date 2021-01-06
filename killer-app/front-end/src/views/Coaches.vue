@@ -1,8 +1,6 @@
 <template>
 <section>
   <div >
-    <h1>Coaches</h1>
-
     <Coaches/>
   </div>
   

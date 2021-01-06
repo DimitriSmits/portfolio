@@ -45,6 +45,18 @@
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
+                    <v-text-field
+                      name="Discord name and tag"
+                      
+                      id="discord"
+                      v-model="discord"
+                      type="discord"
+                      :placeholder="currentCoach.discord"
+                      required></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex xs12>
                     <v-btn @click="editProfile()">Edit profile</v-btn>
                   </v-flex>
                 </v-layout>
@@ -77,6 +89,7 @@
         username: '',
         lolname:'',
         intro:'',
+        discord:'',
         alertSucces: false,
         currentCoach:null
       }
@@ -105,7 +118,8 @@
             coachId: this.$store.state.coachid,
             userName: this.username,
             intro:this.intro,
-            lolname:this.lolname
+            lolname:this.lolname,
+            discord:this.discord
             
           })
           .then(response => {

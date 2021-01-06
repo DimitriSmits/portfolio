@@ -3,6 +3,11 @@
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
+          <v-toolbar  class="toolbarname" color="#272727">
+            <v-spacer></v-spacer>
+            <v-toolbar-title class="justify-center " >Login</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
           <v-card-text>
             <v-container>
               <form @submit.prevent="onLogin">
@@ -31,7 +36,7 @@
                 <v-layout row>
                   {{userid}}
                   <v-flex xs12>
-                    <v-btn @click.native.prevent="send" type="submit">Login</v-btn>
+                    <v-btn @click.native.prevent="send" type="submit" id="loginButton" >Login</v-btn>
                   </v-flex>
                 </v-layout>
                 
@@ -90,6 +95,7 @@
          
           if (response.status !== 204) {
             this.alertSucces = true;
+            this.$router.push('Lessons') 
           }
         })
         .catch((error) => {
@@ -99,3 +105,9 @@
     }
   }
 </script>
+<style scoped>
+.toolbarname{
+  color: #69bdd2;
+}
+
+</style>

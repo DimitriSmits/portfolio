@@ -17,7 +17,7 @@
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="180px"
             >
-              <v-card-title v-text="card.coach.username"></v-card-title>
+              <v-card-title v-text="card.coach.userName"></v-card-title>
             </v-img>
             <v-card-text>
               <div>
@@ -26,9 +26,9 @@
               </div>
             </v-card-text>
             <v-card-actions>
-              <router-link :to="{path: '/Coaches/' + card.coach.coachId}" tag="v-btn"> 
-              <v-btn text>Details</v-btn>
-              </router-link>
+            
+              <v-btn  @click="openSingleSession(card)" text>Details</v-btn>
+             
 
               <v-spacer></v-spacer>
             </v-card-actions>
@@ -46,6 +46,10 @@ export default {
     this.loadSessions();
   },
   methods: {
+    openSingleSession(session){
+      this.$store.commit('setSession', session)
+      this.$router.push('SingleSession') 
+    },
     loadSessions: function () {
       this.axios
         .get("http://192.168.178.21:8089/coachsessions/u/"+this.$store.state.userid)
