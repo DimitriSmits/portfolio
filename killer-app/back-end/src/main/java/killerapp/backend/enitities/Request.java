@@ -24,16 +24,20 @@ public class Request {
 
     private String question;
     private Boolean accepted;
+    private Boolean active;
+    private String feedback;
 
 
     public Request() {
 
     }
-    public Request(User user,Coach coach,String question,Boolean accepted) {
+    public Request(User user,Coach coach,String question,Boolean accepted,Boolean active,String feedback) {
         this.user = user;
         this.coach = coach;
         this.question = question;
         this.accepted = accepted;
+        this.active = active;
+        this.feedback = feedback;
     }
 
 

@@ -1,6 +1,5 @@
 package killerapp.backend.controllers;
 
-import killerapp.backend.FakeData.LessonData;
 import killerapp.backend.enitities.Lesson;
 import killerapp.backend.models.LessonCreateModel;
 import killerapp.backend.repositories.LessonRepo;
@@ -9,8 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import java.util.Optional;
+
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -44,12 +42,4 @@ public class LessonController {
         lessonRepo.save(lesson);
         return new ResponseEntity<>(lesson, HttpStatus.CREATED);
     }
-    /*@PostConstruct
-    public void init() {
-        System.out.println("FKJASDFHKJALDHDLKJAHDJKLADAJK");
-        LessonData lessonData = new LessonData();
-        for (Lesson lesson : lessonData.getLessons()){
-            lessonRepo.save(lesson);
-        }
-    }*/
 }

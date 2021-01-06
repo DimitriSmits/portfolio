@@ -6,4 +6,5 @@ import lombok.Data;
 public class RequestEditModel {
     private Long id;
     private Boolean accepted;
+    private String feedback;
 }

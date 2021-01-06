@@ -15,6 +15,7 @@ public class Coach{
     @Id
     @GeneratedValue
     private Long coachId;
+    @Column(unique=true)
     private String userName;
     private String password;
     private String intro;
