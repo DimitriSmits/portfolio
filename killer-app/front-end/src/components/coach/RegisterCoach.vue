@@ -142,6 +142,7 @@
           console.log(response.status);
           if (response.status !== 204) {
             this.alertSucces = true;
+             this.$router.push('LoginPage') 
           }
         })
         .catch((error) => {
