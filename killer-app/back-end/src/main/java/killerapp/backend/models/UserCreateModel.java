@@ -7,6 +7,7 @@ public class UserCreateModel {
         private String userName;
         private String password;
         private String lolname;
+        private String discord;
         private String salt;
         private Stats stats;
 

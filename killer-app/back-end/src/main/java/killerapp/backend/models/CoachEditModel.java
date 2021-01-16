@@ -8,5 +8,6 @@ public class CoachEditModel {
     private String userName;
     private String intro;
     private String lolname;
+    private String discord;
 
 }

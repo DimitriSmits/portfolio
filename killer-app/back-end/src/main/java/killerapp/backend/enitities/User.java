@@ -20,6 +20,7 @@ public class User {
     private String userName;
     private String password;
     private String lolname;
+    private String discord;
     @Lob
     private String salt;
 
@@ -34,10 +35,11 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String password,String lolname,String salt) {
+    public User(String userName, String password,String lolname,String discord,String salt) {
         this.userName = userName;
         this.password = password;
         this.lolname = lolname;
+        this.discord = discord;
         this.salt = salt;
     }
     public User(String userName, String password,String lolname,String salt,Stats stats) {

@@ -7,6 +7,7 @@ public class CoachCreateModel {
     private String password;
     private String intro;
     private String lolname;
+    private String discord;
     private String salt;
 
 }

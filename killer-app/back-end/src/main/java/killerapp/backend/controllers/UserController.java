@@ -87,7 +87,7 @@ public class UserController {
         userCreateModel.setSalt(finalsalt);
         String generatedHashPassword = hash(userCreateModel.getPassword(),stringToByte(finalsalt));
 
-        User user = new User(userCreateModel.getUserName(), generatedHashPassword,userCreateModel.getLolname(),userCreateModel.getSalt());
+        User user = new User(userCreateModel.getUserName(), generatedHashPassword,userCreateModel.getLolname(),userCreateModel.getDiscord(),userCreateModel.getSalt());
         userRepo.save(user);
         String password = hash(userCreateModel.getPassword(),stringToByte(finalsalt));
 

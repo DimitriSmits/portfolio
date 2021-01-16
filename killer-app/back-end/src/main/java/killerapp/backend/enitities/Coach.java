@@ -20,6 +20,7 @@ public class Coach{
     private String password;
     private String intro;
     private String lolname;
+    private String discord;
     @Lob
     private String salt;
 
@@ -30,11 +31,12 @@ public class Coach{
     public Coach() {
     }
 
-    public Coach(String userName, String password,String intro,String lolname,String salt) {
+    public Coach(String userName, String password,String intro,String lolname,String discord,String salt) {
         this.userName = userName;
         this.password = password;
         this.intro = intro;
         this.lolname = lolname;
+        this.discord = discord;
         this.salt = salt;
     }
 }

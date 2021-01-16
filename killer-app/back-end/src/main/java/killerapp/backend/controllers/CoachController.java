@@ -49,6 +49,7 @@ public class CoachController {
         coach.setUserName(coachEditModel.getUserName());
         coach.setIntro(coachEditModel.getIntro());
         coach.setLolname(coachEditModel.getLolname());
+        coach.setDiscord(coachEditModel.getDiscord());
 
 
         coachRepo.save(coach);
@@ -91,7 +92,7 @@ public class CoachController {
         coachCreateModel.setSalt(finalsalt);
         String generatedHashPassword = hash(coachCreateModel.getPassword(),stringToByte(finalsalt));
 
-        Coach coach = new Coach(coachCreateModel.getUserName(), generatedHashPassword,coachCreateModel.getIntro(),coachCreateModel.getLolname(),coachCreateModel.getSalt());
+        Coach coach = new Coach(coachCreateModel.getUserName(), generatedHashPassword,coachCreateModel.getIntro(),coachCreateModel.getLolname(),coachCreateModel.getDiscord(),coachCreateModel.getSalt());
         coachRepo.save(coach);
         String password = hash(coachCreateModel.getPassword(),stringToByte(finalsalt));
         coach.setSalt(null);
