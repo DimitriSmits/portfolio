@@ -1,0 +1,15 @@
+describe('First test',function(){
+    it('Tests for login',function() {
+        cy.visit('http://192.168.178.21:8080')
+        cy.contains('Login').click()
+        cy.url()
+        .should('include','/LoginPage')
+        cy.get('#username')
+        .type('Henkie')
+        .should('have.value','Henkie')
+        cy.get('#password')
+        .type('wachtwoord')
+        .should('have.value','wachtwoord')
+        cy.get('#loginButton').click()
+    })
+})

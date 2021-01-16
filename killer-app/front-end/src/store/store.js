@@ -9,10 +9,19 @@ export default new Vuex.Store({
       userid: null,
       coachid:null,
       user: null,
+      session: [],
+  },
+  getters:{
+    session(state){
+      return state.session
+    },
   },
   mutations: {
       updateUserid (state, message) {
         state.userid = message
+      },
+      setSession(state,session){
+        state.session = session;
       },
       logoutUser(state){
        state.userid = null

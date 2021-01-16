@@ -1,12 +1,13 @@
-<template>
+<template >
+<div class="backgroundimg">
   <v-container>
     <v-row class="text-center">
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">Register</h1>
         <register/>
       </v-col>
     </v-row>
   </v-container>
+</div>
 </template>
 
 <script>
@@ -20,3 +21,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+.backgroundimg{
+  height: 100vh;
+   background-image: url('../assets/aatrox.jpg');
+  background-size: cover;
+}
+</style>

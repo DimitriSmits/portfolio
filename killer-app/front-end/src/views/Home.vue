@@ -1,8 +1,6 @@
 <template>
 <section>
-  <div >
-    <h1>Homepage</h1>
-  </div>
+
   <HelloWorld/>
   
 </section>
@@ -17,6 +15,9 @@ export default {
  name: 'Home',
  components: {
    HelloWorld
- }
+ },
+
 }
 </script>
+<style>
+</style>

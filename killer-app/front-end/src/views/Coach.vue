@@ -1,8 +1,6 @@
 <template>
 <section>
-  <div >
-    <h1>Coach</h1>
-  </div>
+
   <SingleCoach/>
   
 </section>
